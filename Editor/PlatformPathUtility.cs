@@ -20,12 +20,34 @@ namespace Hackerzhuli.Code.Editor
             return path;
 #elif UNITY_EDITOR_OSX || UNITY_EDITOR_LINUX
             // On Unix-like systems, resolve symbolic links
+            return ResolveSymlink(path);
+#else
+            return path;
+#endif
+        }
+
+        private static string ResolveSymlink(string path)
+        {
             try
             {
-                var fileInfo = new FileInfo(path);
-                if (fileInfo.Exists && fileInfo.LinkTarget != null)
+                var process = new System.Diagnostics.Process
                 {
-                    return fileInfo.LinkTarget;
+                    StartInfo = new System.Diagnostics.ProcessStartInfo
+                    {
+                        FileName = "readlink",
+                        Arguments = $"\"{path}\"",
+                        RedirectStandardOutput = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    }
+                };
+                process.Start();
+                string output = process.StandardOutput.ReadToEnd();
+                process.WaitForExit();
+
+                if (process.ExitCode == 0 && !string.IsNullOrEmpty(output))
+                {
+                    return output.Trim();
                 }
             }
             catch
@@ -33,9 +55,6 @@ namespace Hackerzhuli.Code.Editor
                 // If we can't resolve, return original path
             }
             return path;
-#else
-            return path;
-#endif
         }
     }
 }
