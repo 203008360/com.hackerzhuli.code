@@ -2,18 +2,18 @@ using System;
 
 namespace Hackerzhuli.Code.Editor.Code
 {
-	/// <summary>
-	///     Data for a Visual Studio Code fork.
-	/// </summary>
-	public record CodeFork : IAppInfo
+    /// <summary>
+    ///     Data for a Visual Studio Code fork.
+    /// </summary>
+    public record CodeFork : IAppInfo
     {
-	    /// <summary>
-	    ///     Static array of supported Visual Studio Code forks.<br />
-	    ///     VS Code Insiders is treated as a fork because it have a different executable name than the stable version<br />
-	    ///     If for a fork, a prerelease version and the stable version have same executable name, then it should be treated as
-	    ///     the same fork
-	    /// </summary>
-	    public static readonly CodeFork[] Forks =
+        /// <summary>
+        ///     Static array of supported Visual Studio Code forks.<br />
+        ///     VS Code Insiders is treated as a fork because it have a different executable name than the stable version<br />
+        ///     If for a fork, a prerelease version and the stable version have same executable name, then it should be treated as
+        ///     the same fork
+        /// </summary>
+        public static readonly CodeFork[] Forks =
         {
             new()
             {
@@ -72,49 +72,58 @@ namespace Hackerzhuli.Code.Editor.Code
                 MacAppName = "Trae.app",
                 LinuxExeName = "trae",
                 UserDataDirName = ".trae"
+            },
+            new()
+            {
+                Name = "Antigravity",
+                WindowsDefaultDirName = "Antigravity",
+                WindowsExeName = "Antigravity.exe",
+                MacAppName = "Antigravity.app",
+                LinuxExeName = "antigravity",
+                UserDataDirName = ".antigravity"
             }
         };
 
-	    /// <summary>
-	    ///     The name of the fork (that is displayed to the user).
-	    /// </summary>
-	    public string Name { get; set; }
+        /// <summary>
+        ///     The name of the fork (that is displayed to the user).
+        /// </summary>
+        public string Name { get; set; }
 
-	    /// <summary>
-	    ///     The user data directory name in the user profile (including the leading dot)(it's the same across different
-	    ///     platforms).
-	    /// </summary>
-	    public string UserDataDirName { get; set; }
+        /// <summary>
+        ///     The user data directory name in the user profile (including the leading dot)(it's the same across different
+        ///     platforms).
+        /// </summary>
+        public string UserDataDirName { get; set; }
 
-	    /// <summary>
-	    ///     The latest C# language version supported by this fork.
-	    /// </summary>
-	    public Version LatestLanguageVersion { get; set; }
+        /// <summary>
+        ///     The latest C# language version supported by this fork.
+        /// </summary>
+        public Version LatestLanguageVersion { get; set; }
 
-	    /// <summary>
-	    ///     True if this fork is always a pre-release version, otherwise false(then is pre-release version will be checked
-	    ///     dynamically)
-	    /// </summary>
-	    public bool IsPrerelease { get; set; }
+        /// <summary>
+        ///     True if this fork is always a pre-release version, otherwise false(then is pre-release version will be checked
+        ///     dynamically)
+        /// </summary>
+        public bool IsPrerelease { get; set; }
 
-	    /// <summary>
-	    ///     The default folder name for a fork used on Windows (typically in Program Files or Local AppData).
-	    /// </summary>
-	    public string WindowsDefaultDirName { get; set; }
+        /// <summary>
+        ///     The default folder name for a fork used on Windows (typically in Program Files or Local AppData).
+        /// </summary>
+        public string WindowsDefaultDirName { get; set; }
 
-	    /// <summary>
-	    ///     The executable name on Windows (without .exe extension).
-	    /// </summary>
-	    public string WindowsExeName { get; set; }
+        /// <summary>
+        ///     The executable name on Windows (without .exe extension).
+        /// </summary>
+        public string WindowsExeName { get; set; }
 
-	    /// <summary>
-	    ///     The app name on macOS (without .app extension).
-	    /// </summary>
-	    public string MacAppName { get; set; }
+        /// <summary>
+        ///     The app name on macOS (without .app extension).
+        /// </summary>
+        public string MacAppName { get; set; }
 
-	    /// <summary>
-	    ///     The executable name on Linux.
-	    /// </summary>
-	    public string LinuxExeName { get; set; }
+        /// <summary>
+        ///     The executable name on Linux.
+        /// </summary>
+        public string LinuxExeName { get; set; }
     }
 }
